@@ -70,7 +70,7 @@ TASKS: list[Task] = [
     "/api/v1/users",
     tags=["Users"],
     operation_id="listUsers",
-    summary="Get all users",
+    summary="Get all active users",
     description=(
         "Get all users. Returns every user account in the calling workspace, "
         "including inactive users. Requires a valid API key."
