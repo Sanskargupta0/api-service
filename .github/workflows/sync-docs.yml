@@ -68,6 +68,10 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Copy the generated spec into the docs repository
+        if: steps.diff.outputs.changed == 'true'
+        run: cp customer-openapi.json "docs-repo/${{ env.SPEC_PATH_IN_DOCS_REPO }}"
+
       - name: Create pull request in documentation repository
         if: steps.diff.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v6
