@@ -106,6 +106,27 @@ def get_user(user_id: str) -> User:
 
 
 @app.get(
+    "/api/v1/users/{user_id}/tasks",
+    tags=["Users"],
+    operation_id="listUserTasks",
+    summary="Get a user's tasks",
+    description=(
+        "List all tasks assigned to a specific user. Returns 404 if no user "
+        "with the given ID exists in the workspace."
+    ),
+    response_model=list[Task],
+    responses={
+        404: {"description": "No user with this ID exists."},
+    },
+)
+def list_user_tasks(user_id: str) -> list[Task]:
+    """List tasks assigned to a single user."""
+    if not any(user.id == user_id for user in USERS):
+        raise HTTPException(status_code=404, detail="User not found")
+    return [task for task in TASKS if task.assignee_id == user_id]
+
+
+@app.get(
     "/api/v1/tasks",
     tags=["Tasks"],
     operation_id="listTasks",

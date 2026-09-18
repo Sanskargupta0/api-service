@@ -32,6 +32,7 @@ from app.main import app  # noqa: E402
 CUSTOMER_API_PATHS = {
     "/api/v1/users",
     "/api/v1/users/{user_id}",
+    "/api/v1/users/{user_id}/tasks",
     "/api/v1/tasks",
 }
 
